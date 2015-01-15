@@ -6,7 +6,7 @@
 # holds hash of bookmarked locations
 $_bookmarks = @{}
 
-function Get-Bookmark() {
+function Get-Bookmarks() {
   Write-Output ($_bookmarks.GetEnumerator() | sort Name)
 }
 
@@ -76,8 +76,24 @@ function Invoke-Bookmark($key) {
   }
 }
 
+function Export-Bookmarks() {
+  Write-Host $_bookmarks
+
+  $json = ConvertTo-Json $_bookmarks 
+  $json | Set-Content "bookmarks.json"
+}
+
+function Import-Bookmarks() {
+  $json = Get-Content -Raw "bookmarks.json"
+  $bm = ConvertFrom-Json $json
+  $bm.psobject.properties | Foreach { $_bookmarks[$_.Name] = $_.Value }
+  #$_bookmarks = $bm
+  #return $_bookmarks
+}
+
 Set-Alias g Invoke-Bookmark
 
 Export-ModuleMember Get-Bookmark, Remove-Bookmark, Clear-Bookmarks, Set-Bookmark, Invoke-Bookmark
+Export-ModuleMember Export-Bookmarks, Import-Bookmarks
 
 Export-ModuleMember -Alias g

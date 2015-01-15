@@ -76,15 +76,17 @@ function Invoke-Bookmark($key) {
   }
 }
 
+$_bmfile = "~/ps_bookmarks.json"
+
 function Export-Bookmarks() {
-  Write-Host $_bookmarks
+
 
   $json = ConvertTo-Json $_bookmarks 
-  $json | Set-Content "bookmarks.json"
+  $json | Set-Content $_bmfile
 }
 
 function Import-Bookmarks() {
-  $json = Get-Content -Raw "bookmarks.json"
+  $json = Get-Content -Raw $_bmfile
   $bm = ConvertFrom-Json $json
   $bm.psobject.properties | Foreach { $_bookmarks[$_.Name] = $_.Value }
   #$_bookmarks = $bm

@@ -29,7 +29,7 @@ Example use:
 
 ```powershell
 $ cd c:\temp
-$ Set-Bokmark t
+$ Set-Bookmark t
 $ cd c:\myapp
 $ Set-Bookmark app
 $ g t

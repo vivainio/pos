@@ -1,5 +1,4 @@
 # psbookmark.psm1
-# Exports: Set-Bookmark, Get-Bookmark, Remove-Bookmark, Clear-Bookmarks, Invoke-Bookmark
 
 # Intial code from http://zduck.com/2013/bookmarks-powershell-module/
 
@@ -78,18 +77,20 @@ function Invoke-Bookmark($key) {
 $_bmfile = "~/ps_bookmarks.json"
 
 function Export-Bookmarks() {
-
+<#
+.SYNOPSIS
+  Write bookmarks to (global) bookmarks file
+#>
 
   $json = ConvertTo-Json $_bookmarks 
   $json | Set-Content $_bmfile
+  Write-Host "Bookmarks written to $_bmfile"
 }
 
 function Import-Bookmarks() {
   $json = Get-Content -Raw $_bmfile
   $bm = ConvertFrom-Json $json
   $bm.psobject.properties | Foreach { $_bookmarks[$_.Name] = $_.Value }
-  #$_bookmarks = $bm
-  #return $_bookmarks
 }
 
 function init() {
@@ -106,5 +107,4 @@ Set-Alias g Invoke-Bookmark
 
 Export-ModuleMember Get-Bookmark, Remove-Bookmark, Clear-Bookmarks, Set-Bookmark, Invoke-Bookmark
 Export-ModuleMember Export-Bookmarks, Import-Bookmarks
-
 Export-ModuleMember -Alias g

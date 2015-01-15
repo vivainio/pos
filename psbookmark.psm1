@@ -1,9 +1,8 @@
-# bookmarks.psm1
+# psbookmark.psm1
 # Exports: Set-Bookmark, Get-Bookmark, Remove-Bookmark, Clear-Bookmarks, Invoke-Bookmark
 
-# copied from http://zduck.com/2013/bookmarks-powershell-module/
+# Intial code from http://zduck.com/2013/bookmarks-powershell-module/
 
-# holds hash of bookmarked locations
 $_bookmarks = @{}
 
 function Get-Bookmarks() {
@@ -92,6 +91,16 @@ function Import-Bookmarks() {
   #$_bookmarks = $bm
   #return $_bookmarks
 }
+
+function init() {
+  if (Test-Path $_bmfile) {
+    Import-Bookmarks
+  } else {
+      Write-Host "PsBookmarks Tip: Use 'Set-Bookmark foo', 'g foo' and 'Export-Bookmarks'"
+  }
+}
+
+init
 
 Set-Alias g Invoke-Bookmark
 

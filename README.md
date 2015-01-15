@@ -10,7 +10,7 @@ You may not be a fan of "cd bookmark" hacks that
 
 This PowerShell module provides cheap persistent bookmarks.
 
-Load it up on new shell instances by:
+Load it up on new shell instances by adding it to your launch profile:
 
 ```shell
 
@@ -27,16 +27,24 @@ Import-Module C:/proj/psbookmark/psbookmark.psm1
 
 Example use:
 
-```
-$ cd c:/temp
-$ set-bookmark m
-$ cd c:/myapp
-$ set-bookmark app
-$ g m
+```powershell
+$ cd c:\temp
+$ Set-Bokmark t
+$ cd c:\myapp
+$ Set-Bookmark app
+$ g t
 $ g app
+$ g
+
+Name	value
+----	-----
+t       c:\temp
+app     c:\myapp
+
+
 $ Export-Bookmarks
 
 ```
 
 Everything saved by Export-Bookmarks will be visible in subsequent PowerShell
-launces (provided that you did the Import-Module, as above).
+launches (provided that you did the Import-Module, as above).

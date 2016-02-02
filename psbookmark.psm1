@@ -82,7 +82,7 @@ function Export-Bookmarks() {
   Write bookmarks to (global) bookmarks file
 #>
 
-  $json = ConvertTo-Json $_bookmarks 
+  $json = ConvertTo-Json $_bookmarks
   $json | Set-Content $_bmfile
   Write-Host "Bookmarks written to $_bmfile"
 }
@@ -105,6 +105,6 @@ init
 
 Set-Alias g Invoke-Bookmark
 
-Export-ModuleMember Get-Bookmark, Remove-Bookmark, Clear-Bookmarks, Set-Bookmark, Invoke-Bookmark
+Export-ModuleMember Get-Bookmarks, Remove-Bookmark, Clear-Bookmarks, Set-Bookmark, Invoke-Bookmark
 Export-ModuleMember Export-Bookmarks, Import-Bookmarks
 Export-ModuleMember -Alias g
